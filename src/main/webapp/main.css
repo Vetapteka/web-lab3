@@ -1,0 +1,63 @@
+.header {
+    color: antiquewhite;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    border: 1px solid grey;
+}
+td, tr{
+    border: 1px solid white;
+}
+.content {
+    height: 100%;
+    background: linear-gradient(45deg, tomato, darkblue);
+}
+
+h2 {
+    color: antiquewhite;
+    font-family: "DejaVu Sans Mono", serif;
+}
+
+.element {
+    margin: 1em;
+}
+
+.input-field {
+    text-align: left;
+    margin-left: 3em;
+}
+
+input[type=text], .submit {
+    width: 70%;
+    background: transparent;
+    padding: 40px 40px 40px 100px;
+    border-radius: 20px;
+    border: none;
+    color: black;
+    font-family: "DejaVu Sans Mono", serif;
+    font-size: 24px;
+    cursor: text;
+
+}
+
+.submit {
+    padding: 40px;
+    width: 95%;
+    text-align: center;
+    cursor: pointer;
+    background-color: white;
+}
+
+::placeholder {
+    font-family: "DejaVu Sans Mono", serif;
+    font-size: 24px;
+
+}
+
+.error {
+    color: brown;
+    text-align: center;
+}
