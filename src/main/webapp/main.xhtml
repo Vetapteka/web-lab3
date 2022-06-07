@@ -16,6 +16,7 @@
 <h:head>
     <title>lab3</title>
     <link rel="stylesheet" href="main.css"/>
+
 </h:head>
 
 <h:body>
@@ -31,19 +32,21 @@
             <tr>
                 <td colspan="2" rowspan="2">
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="800" width="800">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="800" width="800" id="graph">
                             <line stroke="purple"
                                   x1="0" x2="800"
                                   y1="400" y2="400"
                                   stroke-width="3"
                                   stroke-linecap="round"
-                            >a</line>
+                            >a
+                            </line>
                             <line stroke="purple"
                                   x1="400" x2="400"
                                   y1="0" y2="800"
                                   stroke-width="3"
                                   stroke-linecap="round"
-                            >a</line>
+                            >a
+                            </line>
                         </svg>
                     </div>
                 </td>
@@ -71,7 +74,7 @@
                         </div>
                         <div>
                             <h:outputLabel for="r-field" value="r"/>
-                            <h:selectOneMenu id="r-field" value="#{pointBean.newPoint.r}">
+                            <h:selectOneMenu id="r-field" class="r-field" value="#{pointBean.newPoint.r}">
                                 <f:selectItem itemLabel="1" itemValue="1"/>
                                 <f:selectItem itemLabel="1.5" itemValue="1.5"/>
                                 <f:selectItem itemLabel="2" itemValue="2"/>
@@ -80,11 +83,12 @@
                             </h:selectOneMenu>
                         </div>
                         <h:commandButton value="Добавить" action="#{pointBean.addPoint()}">
+                            <!--                            ?onevent="drawGraph"-->
                             <f:ajax execute="pointForm" render="resTable"/>
-                            <f:ajax execute="pointForm" onevent="showHiddenValue"/>
                         </h:commandButton>
                     </h:form>
                 </td>
+
 
             </tr>
             <tr>
@@ -135,6 +139,8 @@
             </tr>
         </table>
     </div>
+
+    <script type="text/javascript" src="script.js"></script>
 </h:body>
 
 </html>
