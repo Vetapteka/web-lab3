@@ -20,8 +20,7 @@
 </h:head>
 
 <h:body>
-    <div class="content">
-        <table>
+        <table class="content">
             <tr>
                 <td width="35%"><h2 class="header">Variant 963</h2></td>
                 <td><h2 class="header">Artemenko Svetlana</h2></td>
@@ -49,6 +48,15 @@
                             </line>
                         </svg>
                     </div>
+                <h:form id="hidden-form">
+                    <h:inputHidden value="#{pointBean.newPoint.x}" id = "graph-x"/>
+                    <h:inputHidden value="#{pointBean.newPoint.y}" id = "graph-y"/>
+                    <h:inputHidden value="#{pointBean.newPoint.r}" id = "graph-r"/>
+                    <h:commandButton id="graph-send" action="#{pointBean.addPoint()}" style="opacity: 0">
+                        <f:ajax execute="hidden-form" render="resTable"/>
+                    </h:commandButton>
+                </h:form>
+
                 </td>
                 <td colspan="2">
                     <h:form id="pointForm">
@@ -83,7 +91,6 @@
                             </h:selectOneMenu>
                         </div>
                         <h:commandButton value="Добавить" action="#{pointBean.addPoint()}">
-                            <!--                            ?onevent="drawGraph"-->
                             <f:ajax execute="pointForm" render="resTable"/>
                         </h:commandButton>
                     </h:form>
@@ -138,8 +145,6 @@
                 <td colspan="2"><h2>vsem spasibo vsem poka</h2></td>
             </tr>
         </table>
-    </div>
-
     <script type="text/javascript" src="script.js"></script>
 </h:body>
 
