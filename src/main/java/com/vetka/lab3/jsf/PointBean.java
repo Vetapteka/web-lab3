@@ -46,9 +46,9 @@ public class PointBean {
         String result;
 
         long now = System.nanoTime();
-        result = ((x <= 0 && y <= 0 && y >= -0.5 * x - 0.5 * r) ||
-                (x <= 0 && y >= 0 && x >= -0.5 * r && y <= r) ||
-                (x >= 0 && y <= 0 && x * x + y * y <= 0.25 * r * r)) ? "yes" : "no";
+        result = ((x <= 0 && y <= 0 && y >= -x - r) ||
+                (x <= 0 && y >= 0 && x >= -r && y <= 0.5 * r) ||
+                (x >= 0 && y >= 0 && x * x + y * y <= r * r)) ? "yes" : "no";
         long time = System.nanoTime() - now;
 
         newPoint.setDate(new Date());

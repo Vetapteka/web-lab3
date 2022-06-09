@@ -1,11 +1,13 @@
 let graph = document.getElementById("graph")
 let rField = document.getElementById("pointForm:r-field")
+let allPoints = []
+
 
 rField.addEventListener("click",
     function drawGraph() {
-        removeOldGraph()
-
         let r = rField.value
+
+        removeOldGraph()
 
         let axisX = document.createElementNS("http://www.w3.org/2000/svg", 'line')
         axisX.setAttributeNS(null, "x1", "0")
@@ -51,6 +53,7 @@ rField.addEventListener("click",
         graph.append(axisX)
         graph.append(axisY)
         graph.append(circle)
+        reDrawPoints()
     })
 
 function removeOldGraph() {
@@ -58,5 +61,63 @@ function removeOldGraph() {
         graph.removeChild(graph.firstChild)
     }
 }
+
+graph.addEventListener("click", function (e) {
+    //нарисовать точку
+    let top = graph.getBoundingClientRect().top + window.pageYOffset;
+    let left = graph.getBoundingClientRect().left + window.pageXOffset;
+    let width = 400
+    let dimensionReductionCoef = 4
+
+    let x = (e.pageX - left - width) / width * dimensionReductionCoef
+    let y = (width - e.pageY + top) / width * dimensionReductionCoef
+    let r = rField.value
+
+    let circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
+    circle.setAttributeNS(null, 'cx', (e.pageX - left).toString());
+    circle.setAttributeNS(null, 'cy', (e.pageY - top).toString());
+    circle.setAttributeNS(null, 'r', '2');
+    circle.setAttributeNS(null, 'stroke', setColor(x, y, r));
+    circle.setAttributeNS(null, 'stroke-width', '5');
+    circle.setAttributeNS(null, 'fill-opacity', '0');
+
+    let pointWithRadius = {
+        circle: circle,
+        x: x,
+        y: y
+    };
+    allPoints.push(pointWithRadius)
+
+    graph.append(circle)
+
+    document.getElementById("hidden-form:graph-x").value = x;
+    document.getElementById("hidden-form:graph-y").value = y;
+    document.getElementById("hidden-form:graph-r").value = r;
+
+    document.getElementById("hidden-form:graph-send").click();
+})
+
+//перерисовать все точки
+function reDrawPoints() {
+    // получить радиус и если точка
+    allPoints.forEach(point => graph.append(changeColor(point)))
+}
+
+function changeColor(point) {
+    let r = rField.value
+    let x = point.x
+    let y = point.y
+
+    point.circle.setAttributeNS(null, 'stroke', setColor(x, y, r));
+    return point.circle
+}
+
+function setColor(x, y, r) {
+    return ((x <= 0 && y <= 0 && y >= -x - r) ||
+        (x <= 0 && y >= 0 && x >= -r && y <= 0.5 * r) ||
+        (x >= 0 && y >= 0 && x * x + y * y <= r * r)) ? "purple": "white"
+}
+
+
 
 
