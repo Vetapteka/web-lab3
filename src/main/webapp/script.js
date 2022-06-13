@@ -95,7 +95,20 @@ graph.addEventListener("click", function (e) {
     document.getElementById("hidden-form:graph-r").value = r;
 
     document.getElementById("hidden-form:graph-send").click();
+
+    setTimeout(setSound, 1000)
+
 })
+
+function setSound() {
+    let table = document.getElementById("resTable").lastElementChild
+    let tableBody = table.lastElementChild
+    let res = tableBody.lastElementChild.querySelector(".result").textContent
+
+    let audio = new Audio()
+    audio.src = (res === "yes") ? "assets/yes.mp3" : "assets/no.mp3"
+    audio.autoplay = true
+}
 
 //перерисовать все точки
 function reDrawPoints() {
@@ -115,7 +128,7 @@ function changeColor(point) {
 function setColor(x, y, r) {
     return ((x <= 0 && y <= 0 && y >= -x - r) ||
         (x <= 0 && y >= 0 && x >= -r && y <= 0.5 * r) ||
-        (x >= 0 && y >= 0 && x * x + y * y <= r * r)) ? "purple": "white"
+        (x >= 0 && y >= 0 && x * x + y * y <= r * r)) ? "purple" : "white"
 }
 
 

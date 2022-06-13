@@ -105,7 +105,7 @@
         <tr>
             <td colspan="2" >
                 <h:panelGroup id="resTable">
-                    <h:dataTable  value="#{pointBean.points}" var="point">
+                    <h:dataTable value="#{pointBean.points}" var="point">
                         <h:column>
                             <h3><f:facet name="header"><h2>x</h2></f:facet>
                                 <h:outputText value="#{point.x}"/></h3>
@@ -123,7 +123,7 @@
                         </h:column>
 
                         <h:column>
-                            <h3><f:facet name="header"><h2>result</h2></f:facet>
+                            <h3 class="result"><f:facet name="header"><h2>result</h2></f:facet>
                                 <h:outputText value="#{point.result}"/></h3>
 
                         </h:column>
