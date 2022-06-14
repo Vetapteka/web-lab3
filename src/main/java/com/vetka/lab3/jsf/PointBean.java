@@ -1,6 +1,7 @@
 package com.vetka.lab3.jsf;
 
 import com.vetka.lab3.model.Point;
+import com.vetka.lab3.util.HibernateUtil;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -35,7 +36,9 @@ public class PointBean {
     public void addPoint() {
         calcPoint();
         points.add(newPoint);
+        HibernateUtil.sendPoint(newPoint);
         newPoint = new Point();
+
     }
 
     private void calcPoint() {
@@ -51,7 +54,7 @@ public class PointBean {
                 (x >= 0 && y >= 0 && x * x + y * y <= r * r)) ? "yes" : "no";
         long time = System.nanoTime() - now;
 
-        newPoint.setDate(new Date());
+        newPoint.setModificationDate(new Date());
         newPoint.setResult(result);
         newPoint.setTime(time);
     }

@@ -1,14 +1,32 @@
 package com.vetka.lab3.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="lab3_points")
 public class Point {
+
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+    private Long id;
+
     private double x;
     private double y;
     private double r;
     private String result;
     private long time;
-    private Date date;
+    private Date modificationDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getResult() {
         return result;
@@ -26,12 +44,12 @@ public class Point {
         this.time = time;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getModificationDate() {
+        return modificationDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setModificationDate(Date date) {
+        this.modificationDate = date;
     }
 
     public double getX() {
@@ -58,5 +76,15 @@ public class Point {
         this.r = r;
     }
 
-
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                ", r=" + r +
+                ", result='" + result + '\'' +
+                ", time=" + time +
+                ", date=" + modificationDate +
+                '}';
+    }
 }
