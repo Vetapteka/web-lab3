@@ -59,9 +59,18 @@
             <systemPath>${basedir}/ojdbc8-12.2.0.1.jar</systemPath>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jberet.test-apps/postConstruct -->
+        <dependency>
+            <groupId>org.jberet.test-apps</groupId>
+            <artifactId>postConstruct</artifactId>
+            <version>1.0.0.CR1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
+        <finalName>fff</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

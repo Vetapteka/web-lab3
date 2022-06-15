@@ -3,6 +3,7 @@ package com.vetka.lab3.jsf;
 import com.vetka.lab3.model.Point;
 import com.vetka.lab3.util.HibernateUtil;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.ArrayList;
@@ -14,23 +15,14 @@ import java.util.List;
 public class PointBean {
 
     private Point newPoint = new Point();
+    private List<Point> points;
 
-    private List<Point> points = new ArrayList<>();
-
-    public Point getNewPoint() {
-        return newPoint;
-    }
-
-    public void setNewPoint(Point newPoint) {
-        this.newPoint = newPoint;
-    }
-
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    public void setPoints(List<Point> points) {
-        this.points = points;
+    @PostConstruct
+    public void init() {
+        points = HibernateUtil.getPoint();
+        if (points == null) {
+            points = new ArrayList<>();
+        }
     }
 
     public void addPoint() {
@@ -38,7 +30,6 @@ public class PointBean {
         points.add(newPoint);
         HibernateUtil.sendPoint(newPoint);
         newPoint = new Point();
-
     }
 
     private void calcPoint() {
@@ -58,4 +49,23 @@ public class PointBean {
         newPoint.setResult(result);
         newPoint.setTime(time);
     }
+
+
+    public Point getNewPoint() {
+        return newPoint;
+    }
+
+    public void setNewPoint(Point newPoint) {
+        this.newPoint = newPoint;
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+
 }
